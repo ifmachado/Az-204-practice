@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = Rediscache
-build_property.ProjectDir = C:\Users\MachadoI\Documents\az204\az-redis\Rediscache\
+build_property.ProjectDir = c:\Users\MachadoI\Documents\Github\Az-204-practice\az204-redis\Rediscache\
