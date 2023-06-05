@@ -1,7 +1,7 @@
 ﻿using StackExchange.Redis;
 using System.Threading.Tasks;
 
-string connectionString = "az204redis2365.redis.cache.windows.net:6380,password=U7UhNb9QQsoAglfpUS566rYZ9MSTRTuurAzCaAfSEJQ=,ssl=True,abortConnect=False";
+string connectionString = "CONNECTION_STRING";
 
 var cache = ConnectionMultiplexer.Connect(connectionString);
 IDatabase db = cache.GetDatabase();
