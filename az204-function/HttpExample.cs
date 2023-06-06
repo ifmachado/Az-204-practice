@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
+//HTTP trigger function template by MS
 namespace My.Function
 {
     public static class HttpExample

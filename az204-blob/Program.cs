@@ -3,25 +3,23 @@ using Azure.Storage.Blobs.Models;
 
 Console.WriteLine("Azure Blob Storage exercise\n");
 
-// Run the examples asynchronously, wait for the results before proceeding
+// Run asynchronously, wait for the results before proceeding
 ProcessAsync().GetAwaiter().GetResult();
 
 Console.WriteLine("Press enter to exit the sample application.");
 Console.ReadLine();
 
-static async Task ProcessAsync()
-{
-    // Copy the connection string from the portal in the variable below.
+static async Task ProcessAsync(){
+
     string storageConnectionString = "CONNECTION STRING";
 
-    // Create a client that can authenticate with a connection string
+    // Auth connection string
     BlobServiceClient blobServiceClient = new BlobServiceClient(storageConnectionString);
 
-    // COPY EXAMPLE CODE BELOW HERE
-    //Create a unique name for the container
+    // Unique container name
     string containerName = "wtblob" + Guid.NewGuid().ToString();
 
-    // Create the container and return a container client object
+    // Create container and return container client object
     BlobContainerClient containerClient = await blobServiceClient.CreateBlobContainerAsync(containerName);
     Console.WriteLine("A container named '" + containerName + "' has been created. " +
         "\nTake a minute and verify in the portal." + 
@@ -29,20 +27,20 @@ static async Task ProcessAsync()
     Console.WriteLine("Press 'Enter' to continue.");
     Console.ReadLine();
 
-    // Create a local file in the ./data/ directory for uploading and downloading
+    // Create  file in the data directory for uploading and downloading
     string localPath = "./data/";
     string fileName = "wtfile" + Guid.NewGuid().ToString() + ".txt";
     string localFilePath = Path.Combine(localPath, fileName);
 
-    // Write text to the file
+    // Write text to file
     await File.WriteAllTextAsync(localFilePath, "Hello, World!");
 
-    // Get a reference to the blob
+    // Get blob client
     BlobClient blobClient = containerClient.GetBlobClient(fileName);
 
     Console.WriteLine("Uploading to Blob storage as blob:\n\t {0}\n", blobClient.Uri);
 
-    // Open the file and upload its data
+    // Open file and upload data to blob async
     using (FileStream uploadFileStream = File.OpenRead(localFilePath))
         {
     await blobClient.UploadAsync(uploadFileStream);
@@ -67,13 +65,13 @@ static async Task ProcessAsync()
     Console.WriteLine("Press 'Enter' to continue.");
     Console.ReadLine();
 
-    // Download the blob to a local file
-    // Append the string "DOWNLOADED" before the .txt extension 
+    // Download blob to a local file
+    // Append string "DOWNLOADED" before .txt 
     string downloadFilePath = localFilePath.Replace(".txt", "DOWNLOADED.txt");
 
     Console.WriteLine("\nDownloading blob to\n\t{0}\n", downloadFilePath);
 
-    // Download the blob's contents and save it to a file
+    // Download  blob's contents and save to file
     BlobDownloadInfo download = await blobClient.DownloadAsync();
 
     using (FileStream downloadFileStream = File.OpenWrite(downloadFilePath))
